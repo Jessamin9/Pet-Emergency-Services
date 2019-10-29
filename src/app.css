@@ -1,0 +1,17 @@
+body {
+    background-color:#FFF0F5;
+  }
+  .title {
+    text-align: center; 
+    margin-bottom: 32px;
+    font-size: 64pt;
+    color: #B22222;
+  }
+  .title:hover {
+    font-family: Helvetica, Arial, sans-serif;
+    color: #00c7b6;
+  }
+  p {
+    text-align: center;
+    color:#000000;
+  }
