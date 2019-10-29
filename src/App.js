@@ -15,7 +15,7 @@ const App = () => {
     { manual: true }
   );
   const locations = (data && (data.clinics || data.shelters)) || [];
-  const goToApp = () => type => {
+  const goToApp = type => () => {
     setLocationType(type);
     getLocations();
   };
