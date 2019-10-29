@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import useAxios from "axios-hooks";
 import { usePosition } from "use-position"; // https://github.com/trekhleb/use-position
 import { Button, Grid } from "@material-ui/core";
+import { ThemeProvider } from '@material-ui/core/styles';
 
 import "./app.css";
+import theme from "./theme";
 import Navigation from "./Navigation";
 import Location from "./Location";
 
@@ -20,35 +22,44 @@ const App = () => {
     getLocations();
   };
 
-  return locationType ? (
-    <div>
-      <Navigation reloadShelters={getLocations} />
+  return (
+    <ThemeProvider theme={theme}>
+      {locationType ? (
+        <div>
+          <Navigation reloadShelters={getLocations} />
 
-      <Grid container spacing={1}>
-        {locations.map(location => (
-          <Location
-            name={location.name}
-            address={location.address}
-            phone={location.phone}
-            key={location.id}
-          />
-        ))}
-      </Grid>
-    </div>
-  ) : (
-    <div class="container">
-      <h1 class="title">&#128062;Pet Emergency Services of the Bay&#128062;</h1>
-      <p>
-        Pets are a part of the family. That's why
-        <strong>Pet Emergency Services of the Bay</strong>
-        is here to help you locate the nearest emergency pet hospitals,
-        veterinarians, and shelters. &#128058;
-      </p>
-      <Button onClick={goToApp("Shelters")}> Shelters 🏡</Button>
-      <Button onClick={goToApp("Clinics")}>
-        Emergency Clinics/Veterinarians 🏥
-      </Button>
-    </div>
+          <Grid container spacing={1}>
+            {locations.map(location => (
+              <Location
+                name={location.name}
+                address={location.address}
+                phone={location.phone}
+                key={location.id}
+              />
+            ))}
+          </Grid>
+        </div>
+      ) : (
+        <div class="container">
+          <h1 class="title">
+            &#128062;Pet Emergency Services of the Bay&#128062;
+          </h1>
+          <p>
+            Pets are a part of the family. That's why
+            <strong>Pet Emergency Services of the Bay</strong>
+            is here to help you locate the nearest emergency pet hospitals,
+            veterinarians, and shelters. &#128058;
+          </p>
+          <Button variant="outlined" onClick={goToApp("Shelters")}>
+            {" "}
+            Shelters 🏡
+          </Button>
+          <Button variant="outlined" onClick={goToApp("Clinics")}>
+            Emergency Clinics/Veterinarians 🏥
+          </Button>
+        </div>
+      )}
+    </ThemeProvider>
   );
 };
 
